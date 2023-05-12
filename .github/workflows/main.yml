@@ -21,9 +21,9 @@ jobs:
       with:
         dotnet-version: '6.0.x'
     - name: Install dependencies
-      run: dotnet restore ./TestCICD/DotNetAPI/TestCICD.csproj
+      run: dotnet restore ./DotNetAPI/TestCICD.csproj
     - name: Build
-      run: dotnet build ./TestCICD/DotNetAPI/TestCICD.csproj --configuration Release --no-restore
+      run: dotnet build ./DotNetAPI/TestCICD.csproj --configuration Release --no-restore
   PublishArtifacts:
     needs: Build
     runs-on: ubuntu-latest    
@@ -40,13 +40,13 @@ jobs:
       with:
         dotnet-version: '6.0.x'
     - name: Install dependencies
-      run: dotnet restore ./TestCICD/DotNetAPI/TestCICD.csproj
+      run: dotnet restore ./DotNetAPI/TestCICD.csproj
     - name: Create artifacts folder
       run: |
         mkdir "$GITHUB_WORKSPACE/artifacts"
         mkdir "$GITHUB_WORKSPACE/artifacts/TestCICD"
     - name: Publish TestCICD
-      run: dotnet publish TestCICD/DotNetAPI/TestCICD.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/TestCICD"
+      run: dotnet publish DotNetAPI/TestCICD.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/TestCICD"
     - name: Install Octopus CLI
       uses: OctopusDeploy/install-octopus-cli-action@v1
       with:
